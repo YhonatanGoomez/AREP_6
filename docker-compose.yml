@@ -1,0 +1,53 @@
+version: '2'
+services:
+  servicefacade:
+    build:
+      context: .
+      dockerfile: DockerFile.Fachada
+    container_name: service_facade
+    ports:
+      - "37001:39000"
+    depends_on:
+      - logserv1
+      - logserv2
+      - logserv3
+  logserv1:
+    build:
+      context: .
+      dockerfile: DockerFile.1
+    container_name: log1container
+    ports:
+      - "37002:40001"
+    depends_on:
+      - db
+  logserv2:
+    build:
+      context: .
+      dockerfile: DockerFile.2
+    container_name: log2container
+    ports:
+      - "37003:50002"
+    depends_on:
+      - db
+  logserv3:
+    build:
+      context: .
+      dockerfile: DockerFile.3
+    container_name: log3container
+    ports:
+      - "37004:60003"
+    depends_on:
+      - db
+  db:
+    image: mongo:4.4.6-bionic
+    container_name: db
+    volumes:
+      - mongodb:/data/db
+      - mongodb_config:/data/configdb
+    ports:
+      - 27017:27017
+    command: mongod
+
+volumes:
+  mongodb:
+  mongodb_config:

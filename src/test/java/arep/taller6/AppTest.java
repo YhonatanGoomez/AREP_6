@@ -1,4 +1,4 @@
-package edu.escuelaing.arem.ASE.app;
+package arep.taller6;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

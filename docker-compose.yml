@@ -40,7 +40,7 @@ services:
       - db
   db:
     image: mongo:4.4.6-bionic
-    container_name: db
+    container_name: db_service
     volumes:
       - mongodb:/data/db
       - mongodb_config:/data/configdb
